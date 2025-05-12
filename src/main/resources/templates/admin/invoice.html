@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="admin/layout :: layout(~{::body})">
+<body>
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Fatura</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Fatura</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="callout callout-info">
+        <h5><i class="fas fa-info"></i> Observação:</h5>
+        Esta página foi ajustada para impressão. Clique no botão imprimir para testar.
+      </div>
+
+      <div class="invoice p-3 mb-3">
+        <div class="row">
+          <div class="col-12">
+            <h4>
+              <i class="fas fa-globe"></i> AdminLTE, Inc.
+              <small class="float-right">Data: 10/03/2025</small>
+            </h4>
+          </div>
+        </div>
+
+        <div class="row invoice-info">
+          <div class="col-sm-4 invoice-col">
+            De
+            <address>
+              <strong>Admin, Inc.</strong><br>
+              Rua Exemplo, 123<br>
+              Maceió, AL 57000-000<br>
+              Telefone: (82) 1234-5678<br>
+              Email: contato@admin.com
+            </address>
+          </div>
+          <div class="col-sm-4 invoice-col">
+            Para
+            <address>
+              <strong>João da Silva</strong><br>
+              Rua Cliente, 456<br>
+              Arapiraca, AL 57300-000<br>
+              Telefone: (82) 98765-4321<br>
+              Email: joao@cliente.com
+            </address>
+          </div>
+          <div class="col-sm-4 invoice-col">
+            <b>Fatura #000001</b><br>
+            <b>Pedido:</b> A1B2C3<br>
+            <b>Pagamento até:</b> 17/03/2025<br>
+            <b>Conta:</b> 123-456789
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Qtd</th>
+                  <th>Produto</th>
+                  <th>Código</th>
+                  <th>Descrição</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Produto A</td>
+                  <td>001</td>
+                  <td>Exemplo de produto A</td>
+                  <td>R$ 100,00</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Produto B</td>
+                  <td>002</td>
+                  <td>Exemplo de produto B</td>
+                  <td>R$ 200,00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <p class="lead">Métodos de Pagamento:</p>
+            <img th:src="@{/dist/img/credit/visa.png}" alt="Visa">
+            <img th:src="@{/dist/img/credit/mastercard.png}" alt="Mastercard">
+            <img th:src="@{/dist/img/credit/american-express.png}" alt="American Express">
+            <img th:src="@{/dist/img/credit/paypal2.png}" alt="Paypal">
+            <p class="text-muted well well-sm shadow-none mt-2">
+              Observação adicional sobre a forma de pagamento.
+            </p>
+          </div>
+          <div class="col-6">
+            <p class="lead">Valor Total</p>
+            <div class="table-responsive">
+              <table class="table">
+                <tr>
+                  <th style="width:50%">Subtotal:</th>
+                  <td>R$ 300,00</td>
+                </tr>
+                <tr>
+                  <th>Taxa (10%)</th>
+                  <td>R$ 30,00</td>
+                </tr>
+                <tr>
+                  <th>Entrega:</th>
+                  <td>R$ 15,00</td>
+                </tr>
+                <tr>
+                  <th>Total:</th>
+                  <td>R$ 345,00</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row no-print">
+          <div class="col-12">
+            <a href="#" class="btn btn-default" onclick="window.print()"><i class="fas fa-print"></i> Imprimir</a>
+            <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Pagar</button>
+            <button type="button" class="btn btn-primary float-right mr-2">
+              <i class="fas fa-download"></i> Gerar PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

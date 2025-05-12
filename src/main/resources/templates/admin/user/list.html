@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="admin/layout :: layout(~{::body})">
+
+<body>
+  <h2 class="mb-4">Lista de Usuários</h2>
+  <a class="btn btn-primary mb-3" th:href="@{/users/form}">Novo Usuário</a>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="bg-light text-dark font-weight-bold">
+        <tr>
+          <th>ID</th>
+          <th>Email</th>
+          <th>Username</th>
+          <th>Status</th>
+          <th>Permissões</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.username}"></td>
+          <td>
+            <span th:if="${user.enabled == 'Y'}" class="badge badge-success">Ativo</span>
+            <span th:if="${user.enabled == 'N'}" class="badge badge-secondary">Inativo</span>
+          </td>
+          <td>
+            <span th:each="auth : ${user.authorities}" th:text="${authorityLabels[auth] ?: auth}"
+              class="badge badge-info mr-1">
+            </span>
+          </td>
+          <td>
+            <a class="btn btn-sm btn-info" th:href="@{'/users/update/' + ${user.id}}">Editar</a>
+            <a class="btn btn-sm btn-danger" th:href="@{'/users/delete/' + ${user.id}}"
+              onclick="return confirm('Deseja excluir este usuário?')">Excluir</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <style>
+    .table-striped tbody tr:nth-of-type(even) {
+      background-color: #fff;
+    }
+  </style>
+</body>
+
+</html>

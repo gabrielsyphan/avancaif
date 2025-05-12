@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: avancaif
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/avancaif
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+jwt:
+  secret: ${JWT_SECRET:your_jwt_secret_key}
+  expiration: ${JWT_EXPIRATION:3600000}

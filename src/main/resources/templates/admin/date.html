@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="admin/layout :: layout(~{::body})">
+
+<body>
+  <div class="container mt-4">
+    <h2>Formulário com Datas</h2>
+    <form method="post">
+
+      <div class="form-group">
+        <label>Data de nascimento</label>
+        <div class="input-group date" id="datepicker" data-target-input="nearest">
+          <input type="text" class="form-control datetimepicker-input" data-target="#datepicker" />
+          <div class="input-group-append" data-target="#datepicker" data-toggle="datetimepicker">
+            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Período de acesso</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+          </div>
+          <input type="text" class="form-control float-right" id="daterange">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success">Salvar</button>
+    </form>
+  </div>
+
+  <!-- Script de inicialização POS-CARREGAMENTO -->
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    document.addEventListener('DOMContentLoaded', function () {
+      moment.locale('pt-br');
+
+      $('#datepicker').datetimepicker({
+        format: 'L',
+        locale: 'pt-br'
+      });
+
+      $('#daterange').daterangepicker({
+        locale: {
+          format: 'DD/MM/YYYY',
+          applyLabel: 'Aplicar',
+          cancelLabel: 'Cancelar',
+          daysOfWeek: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+          monthNames: [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+          ],
+          firstDay: 0
+        }
+      });
+    });
+    /*]]>*/
+  </script>
+</body>
+
+</html>
