@@ -18,8 +18,8 @@ Para executar este projeto, certifique-se de ter instalado:
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-repositorio/avancaif-api-java.git
-   cd avancaif-api-java
+   git clone https://github.com/seu-repositorio/avancaif.git
+   cd avancaif
    ```
 
 2. **Compile o projeto**:
