@@ -65,14 +65,12 @@ src/
 │   ├── java/
 │   │   └── br/com/cpsoftware/avancaif/
 │   │       ├── AvancaIfApplication.java  # Ponto de entrada principal da aplicação
-│   │       ├── domain/                  # Entidades do domínio
-│   │       ├── app/                     # Modelos e serviços da aplicação
-│   │       ├── usecase/                 # Lógica de negócios
-│   │       └── shared/                  # Utilitários compartilhados (ex.: mappers, exceptions)
+│   │       ├── domain/                   # Entidades do domínio
+│   │       └── app/                      # Modelos e serviços da aplicação
 │   └── resources/
-│       ├── application.properties       # Configuração da aplicação
-│       └── static/                      # Recursos estáticos (se houver)
-├── test/                                # Testes unitários e de integração
+│       ├── application.yml               # Configuração da aplicação
+│       └── static/                       # Recursos estáticos (se houver)
+├── test/                                 # Testes unitários e de integração
 ```
 
 ---
