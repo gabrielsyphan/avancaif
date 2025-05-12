@@ -1,3 +1,5 @@
+# <div align="center"><img src="src/main/resources/static/dist/img/logo.png" alt="AvancaIF Logo" width="150" height="150" style="border-radius: 100px;"></div>
+
 # AvancaIF API (Java)
 
 AvancaIF é uma API baseada em Spring Boot. Este projeto utiliza tecnologias modernas de Java e frameworks para oferecer uma solução backend robusta e escalável.
