@@ -1,12 +1,13 @@
 package br.com.cpsoftware.avancaif.app.security;
 
+import br.com.cpsoftware.avancaif.app.util.constant.PathApiConstants;
+import br.com.cpsoftware.avancaif.app.util.constant.PathWebConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,23 +31,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers(
-                        "/",
-                        "/login",
-                        "/api/login",
-                        "/dist/**"
-                ).permitAll()
-                .requestMatchers("/api/users").hasRole("ADMIN")
-                .anyRequest().authenticated()
-            )
-            .httpBasic(Customizer.withDefaults());
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(
+                                "/",
+                                "/dist/**",
+                                PathWebConstants.LOGIN,
+                                PathWebConstants.REGISTER,
+                                PathApiConstants.API_V1_LOGIN,
+                                PathApiConstants.API_V1_REGISTER
+                        ).permitAll()
+                        .requestMatchers("/api/users").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                );
 
         http.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
@@ -58,6 +61,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(10);
     }
 }

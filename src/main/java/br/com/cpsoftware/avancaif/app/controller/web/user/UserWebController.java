@@ -1,7 +1,7 @@
 package br.com.cpsoftware.avancaif.app.controller.web.user;
 
 import br.com.cpsoftware.avancaif.app.util.constant.PathWebConstants;
-import br.com.cpsoftware.avancaif.domain.entity.UserEntity;
+import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import br.com.cpsoftware.avancaif.domain.enums.Role;
 import br.com.cpsoftware.avancaif.domain.usecase.RetrieveAllUsersUseCase;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,8 @@
 package br.com.cpsoftware.avancaif.app.provider.mapstruct;
 
+import br.com.cpsoftware.avancaif.app.controller.api.register.data.RegisterNewUserResponse;
 import br.com.cpsoftware.avancaif.app.provider.postgres.model.UserModel;
-import br.com.cpsoftware.avancaif.domain.entity.UserEntity;
+import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -10,7 +11,9 @@ public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    UserModel entityToModel(UserEntity user);
+    UserModel toModel(UserEntity user);
 
-    UserEntity modelToEntity(UserModel user);
+    UserEntity toEntity(UserModel user);
+
+    RegisterNewUserResponse toNewUserResponse(UserEntity user);
 }

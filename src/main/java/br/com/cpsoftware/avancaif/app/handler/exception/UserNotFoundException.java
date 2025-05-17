@@ -1,12 +1,15 @@
 package br.com.cpsoftware.avancaif.app.handler.exception;
 
-public class UserNotFoundException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+public class UserNotFoundException extends ResponseStatusException {
 
     public UserNotFoundException() {
-        super("User not found");
+        super(HttpStatus.NOT_FOUND, "User not found");
     }
 
     public UserNotFoundException(String message) {
-        super(message);
+        super(HttpStatus.NOT_FOUND, message);
     }
 }

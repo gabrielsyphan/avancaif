@@ -1,9 +1,9 @@
-package br.com.cpsoftware.avancaif.app.provider.postgres.impl;
+package br.com.cpsoftware.avancaif.app.provider.postgres.impl.user;
 
 import br.com.cpsoftware.avancaif.app.provider.mapstruct.UserMapper;
 import br.com.cpsoftware.avancaif.app.provider.postgres.repository.UserRepository;
-import br.com.cpsoftware.avancaif.domain.entity.UserEntity;
-import br.com.cpsoftware.avancaif.domain.provider.CreateNewUserProvider;
+import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
+import br.com.cpsoftware.avancaif.domain.provider.user.CreateNewUserProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +20,8 @@ public class CreateNewUserProviderImpl implements CreateNewUserProvider {
 
     @Override
     public UserEntity apply(UserEntity user) {
-        var userModel = mapper.entityToModel(user);
+        var userModel = mapper.toModel(user);
         var userSaved = userRepository.save(userModel);
-        return mapper.modelToEntity(userSaved);
+        return mapper.toEntity(userSaved);
     }
 }

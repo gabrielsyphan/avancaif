@@ -1,7 +1,7 @@
 package br.com.cpsoftware.avancaif.app.controller.api.user;
 
 import br.com.cpsoftware.avancaif.app.util.constant.PathApiConstants;
-import br.com.cpsoftware.avancaif.domain.entity.UserEntity;
+import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import br.com.cpsoftware.avancaif.domain.usecase.RetrieveAllUsersUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

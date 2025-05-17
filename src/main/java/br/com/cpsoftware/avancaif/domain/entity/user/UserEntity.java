@@ -1,4 +1,6 @@
-package br.com.cpsoftware.avancaif.domain.entity;
+package br.com.cpsoftware.avancaif.domain.entity.user;
+
+import br.com.cpsoftware.avancaif.domain.enums.Enabled;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,9 +10,19 @@ public class UserEntity {
     private Long id;
     private String email;
     private String password;
-    private String username;
-    private String enabled;
+    private String name;
+    private Enabled enabled;
     private Set<String> authorities = new HashSet<>();
+
+    public UserEntity() {}
+
+    public UserEntity(String name, String email, String password, Enabled enabled, String role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.enabled = enabled;
+        this.authorities.add(role);
+    }
 
     public Long getId() {
         return id;
@@ -36,19 +48,19 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getEnabled() {
+    public Enabled getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(String enabled) {
+    public void setEnabled(Enabled enabled) {
         this.enabled = enabled;
     }
 
@@ -58,5 +70,10 @@ public class UserEntity {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public UserEntity withPassword(String password) {
+        this.password = password;
+        return this;
     }
 }

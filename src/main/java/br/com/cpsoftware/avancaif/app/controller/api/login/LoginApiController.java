@@ -31,7 +31,7 @@ public class LoginApiController {
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        var authenticationRequest = new UsernamePasswordAuthenticationToken(loginRequest.username(),
+        var authenticationRequest = new UsernamePasswordAuthenticationToken(loginRequest.email(),
                 loginRequest.password());
         var authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
 

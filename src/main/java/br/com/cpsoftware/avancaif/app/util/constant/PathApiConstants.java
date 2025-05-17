@@ -7,6 +7,9 @@ public class PathApiConstants {
     public static final String LOGIN = "/login";
     public static final String API_V1_LOGIN = API_V1 + LOGIN;
 
+    public static final String REGISTER = "/register";
+    public static final String API_V1_REGISTER = API_V1 + REGISTER;
+
     public static final String USERS = "/users";
     public static final String API_V1_USERS = API_V1 + USERS;
 

@@ -12,6 +12,6 @@ public class HomeWebController {
 
     @GetMapping
     public String getPage(Model model) {
-        return PathWebConstants.HOME_PAGE;
+        return PathWebConstants.HOME_PAGE_PUBLIC;
     }
 }

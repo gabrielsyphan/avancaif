@@ -2,18 +2,9 @@ package br.com.cpsoftware.avancaif.app.provider.postgres.model;
 
 import java.util.Set;
 import java.util.HashSet;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.JoinColumn;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+
+import br.com.cpsoftware.avancaif.domain.enums.Enabled;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -23,18 +14,18 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email
-    @NotBlank(message = "User email cannot be blank.")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "User password cannot be blank.")
+    @Column(nullable = false, length = 60)
     private String password;
 
-    @NotBlank(message = "Username cannot be blank.")
-    private String username;
+    @Column(nullable = false, unique = true)
+    private String name;
 
-    @Column(nullable = false, length = 1)
-    private String enabled;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(1) default 'N'")
+    private Enabled enabled;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
@@ -61,19 +52,13 @@ public class UserModel {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
-    public String getEnabled() {
+    public Enabled isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(String enabled) {
+    public void setEnabled(Enabled enabled) {
         this.enabled = enabled;
     }
 
