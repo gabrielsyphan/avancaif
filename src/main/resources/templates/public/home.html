@@ -19,10 +19,12 @@
   <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
     <a href="/" class="text-2xl font-semibold text-gray-800">Avanca<span class="text-blue-600">IF</span></a>
     <div class="space-x-4">
-      <a href="/login" class="text-gray-700 font-medium hover:text-blue-600 transition">Login</a>
-      <a href="/register" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+      <a href="/login" id="login-nav-btn" class="text-gray-700 font-medium hover:text-blue-600 transition">Login</a>
+      <a href="/register" id="register-nav-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
         Register
       </a>
+      <a href="/dash" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition" id="home-nav-btn" style="display: none;">Acessar</a>
+      <a href="javascript:void(0);" onclick="logout()" class="text-gray-700 font-medium hover:text-blue-600 transition" id="logout-nav-btn" style="display: none;">Logout</a>
     </div>
   </div>
 </nav>
@@ -35,8 +37,9 @@
       Descubra badges, projetos práticos e cursos personalizados. Aprenda e evolua no seu ritmo.
     </p>
     <div class="flex justify-center gap-4">
-      <a href="/register" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Comece agora</a>
-      <a href="/login" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition">Já tenho conta</a>
+      <a href="/register" id="login-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Comece agora</a>
+      <a href="/login" id="register-btn" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition">Já tenho conta</a>
+      <a href="/dash" id="home-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition" style="display: none">Acessar</a>
     </div>
   </div>
 </section>
@@ -67,6 +70,7 @@
   <p>&copy; 2025 AvancaIF. Todos os direitos reservados.</p>
 </footer>
 
+<script src="/dist/js/home.js"></script>
 <script>lucide.createIcons();</script>
 </body>
 </html>

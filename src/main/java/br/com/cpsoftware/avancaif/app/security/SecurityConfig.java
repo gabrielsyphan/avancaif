@@ -1,5 +1,6 @@
 package br.com.cpsoftware.avancaif.app.security;
 
+import br.com.cpsoftware.avancaif.app.handler.advisor.JwtAuthenticationEntryPoint;
 import br.com.cpsoftware.avancaif.app.util.constant.PathApiConstants;
 import br.com.cpsoftware.avancaif.app.util.constant.PathWebConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +22,27 @@ public class SecurityConfig {
 
     private final RequestFilter requestFilter;
     private final CustomUserDetailsService userDetailsService;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
-    public SecurityConfig(RequestFilter requestFilter, CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(RequestFilter requestFilter,
+                          CustomUserDetailsService userDetailsService,
+                          JwtAuthenticationEntryPoint authenticationEntryPoint) {
         this.requestFilter = requestFilter;
         this.userDetailsService = userDetailsService;
+        this.authenticationEntryPoint = authenticationEntryPoint;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(authorize -> authorize
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(authenticationEntryPoint) // 🔥 controla resposta não autenticada
+                )
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/",
-                                "/dist/**",
+                                "/", "/dist/**",
                                 PathWebConstants.LOGIN,
                                 PathWebConstants.REGISTER,
                                 PathApiConstants.API_V1_LOGIN,
@@ -49,7 +56,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {

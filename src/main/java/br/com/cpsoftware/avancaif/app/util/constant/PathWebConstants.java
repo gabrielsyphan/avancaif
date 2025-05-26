@@ -13,8 +13,10 @@ public class PathWebConstants {
 
     public static final String HOME = "/";
     public static final String HOME_PAGE_PUBLIC = PUBLIC_PATH + "home.html";
-    public static final String HOME_PAGE_PRIVATE = PRIVATE_PATH + "home.html";
+
+    public static final String DASH = "/dash";
+    public static final String DASH_PAGE = PRIVATE_PATH + "dash.html";
 
     public static final String USERS = "/users";
-    public static final String LIST_USERS_PAGE = "/admin/user/list.html";
+    public static final String LIST_USERS_PAGE = DASH + "/user/list.html";
 }

@@ -52,7 +52,13 @@ public class UserModel {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Enabled isEnabled() {
         return enabled;

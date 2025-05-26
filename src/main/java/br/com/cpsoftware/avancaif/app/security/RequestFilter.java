@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -33,15 +32,30 @@ public class RequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
-            @NonNull FilterChain chain)
+                                    @NonNull FilterChain chain)
             throws ServletException, IOException {
 
-        var requestTokenHeader = request.getHeader("Authorization");
-        String email = null;
+        String requestTokenHeader = request.getHeader("Authorization");
         String jwtToken = null;
+        String email = null;
 
+        // 🔥 Tenta pegar do header Authorization
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
+        }
+
+        // 🔥 Se não veio no header, tenta pegar de um cookie chamado "JWT"
+        if (jwtToken == null && request.getCookies() != null) {
+            for (var cookie : request.getCookies()) {
+                if (cookie.getName().equals("JWT")) {
+                    jwtToken = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        // 🔥 Valida o token
+        if (jwtToken != null) {
             try {
                 email = jwtUtil.getUserEmailFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
@@ -51,14 +65,11 @@ public class RequestFilter extends OncePerRequestFilter {
             }
         }
 
-        // Once we get the token validate it.
+        // 🔥 Se tem email e ainda não está autenticado
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
             var userDetails = this.userDetailsService.loadUserByUsername(email);
 
-            // if token is valid configure Spring Security to manually set authentication
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
-
                 var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken
@@ -66,6 +77,7 @@ public class RequestFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
         }
+
         chain.doFilter(request, response);
     }
 }

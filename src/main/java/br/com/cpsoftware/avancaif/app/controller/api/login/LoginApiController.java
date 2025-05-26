@@ -4,6 +4,8 @@ import br.com.cpsoftware.avancaif.app.controller.api.login.data.LoginRequest;
 import br.com.cpsoftware.avancaif.app.controller.api.login.data.LoginResponse;
 import br.com.cpsoftware.avancaif.app.handler.exception.UserNotFoundResponseException;
 import br.com.cpsoftware.avancaif.app.util.constant.PathApiConstants;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,14 +32,28 @@ public class LoginApiController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        var authenticationRequest = new UsernamePasswordAuthenticationToken(loginRequest.email(),
-                loginRequest.password());
-        var authenticationResponse = this.authenticationManager.authenticate(authenticationRequest);
+    public ResponseEntity<LoginResponse> login(
+            @RequestBody LoginRequest loginRequest,
+            HttpServletResponse response
+    ) {
+        var authRequest = new UsernamePasswordAuthenticationToken(
+                loginRequest.email(),
+                loginRequest.password()
+        );
 
-        if (authenticationResponse != null && authenticationResponse.isAuthenticated()) {
-            var loggedUser = (User) authenticationResponse.getPrincipal();
+        var authResponse = authenticationManager.authenticate(authRequest);
+
+        if (authResponse != null && authResponse.isAuthenticated()) {
+            var loggedUser = (User) authResponse.getPrincipal();
             var token = jwtUtil.generateToken(loggedUser);
+
+            // 🔥 Cria o cookie com o JWT
+            var cookie = new Cookie("JWT", token);
+            cookie.setHttpOnly(true);
+            cookie.setPath("/");
+            cookie.setMaxAge(7 * 24 * 60 * 60); // 7 dias, ou ajuste conforme sua necessidade
+            response.addCookie(cookie);
+
             var loginResponse = new LoginResponse(token, loggedUser.getUsername());
             return ResponseEntity.ok(loginResponse);
         }
@@ -45,3 +61,4 @@ public class LoginApiController {
         throw new UserNotFoundResponseException();
     }
 }
+
