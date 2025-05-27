@@ -1,6 +1,12 @@
 const form = document.getElementById('loginForm');
 const loader = document.getElementById('loaderOverlay');
 
+const token = localStorage.getItem('token');
+if (token) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+}
+
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
 
