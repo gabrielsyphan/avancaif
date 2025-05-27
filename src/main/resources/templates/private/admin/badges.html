@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cadastro de Badges | AvancaIF</title>
+    <title>Cadastro de Emblemas | AvancaIF</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
@@ -26,22 +26,22 @@
             <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
                 <ol class="list-none p-0 inline-flex space-x-2">
                     <li class="flex items-center">
-                        <a href="/admin/dash" class="hover:text-blue-600">Dashboard</a>
+                        <a href="/dash" class="hover:text-blue-600">Dashboard</a>
                         <svg class="w-3 h-3 mx-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                         </svg>
                     </li>
                     <li class="flex items-center">
-                        <a href="/admin/badges" class="hover:text-blue-600">Badges</a>
+                        <a href="/admin/badges" class="hover:text-blue-600">Emblemas</a>
                     </li>
                 </ol>
             </nav>
-            <h1 class="text-2xl font-semibold text-gray-800">Cadastro de Badges</h1>
-            <p class="text-sm text-gray-500">Gerencie as badges do sistema. Crie, edite e visualize as existentes.</p>
+            <h1 class="text-2xl font-semibold text-gray-800">Cadastro de Emblemas</h1>
+            <p class="text-sm text-gray-500">Gerencie os emblemas do sistema. Crie, edite e visualize as existentes.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
-                <h2 class="text-lg font-semibold mb-4 text-gray-800">Informações da Badge</h2>
+                <h2 class="text-lg font-semibold mb-4 text-gray-800">Informações do Emblema</h2>
 
                 <form class="space-y-4">
                     <div>
@@ -52,7 +52,7 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
-                        <textarea id="description" placeholder="Descreva como essa badge é conquistada..."
+                        <textarea id="description" placeholder="Descreva como esse emblema é conquistada..."
                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
                                   rows="3"></textarea>
                     </div>
@@ -93,13 +93,13 @@
                 <div class="w-28 h-28 bg-gray-100 rounded-full flex items-center justify-center border border-gray-300 overflow-hidden">
                     <img id="badgePreview" src="https://api.dicebear.com/8.x/bottts/svg?seed=placeholder" alt="Preview" class="w-full h-full object-cover"/>
                 </div>
-                <h3 class="text-lg font-medium text-gray-800">Preview da Badge</h3>
-                <p class="text-sm text-gray-500">A pré-visualização da badge aparecerá aqui.</p>
+                <h3 class="text-lg font-medium text-gray-800">Preview do Emblema</h3>
+                <p class="text-sm text-gray-500">A pré-visualização do emblema aparecerá aqui.</p>
             </div>
         </div>
 
         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
-            <h2 class="text-lg font-semibold text-gray-800 mb-4">Badges Criadas</h2>
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Emblemas Criados</h2>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50 text-gray-600 font-medium">
