@@ -39,12 +39,156 @@
       <h1 class="text-2xl font-semibold text-gray-800">Cadastro de Categorias</h1>
       <p class="text-sm text-gray-500">Gerencie as categorias do sistema. Crie, edite e visualize as existentes.</p>
     </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Formulário -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <h2 class="text-lg font-semibold mb-4 text-gray-800">Nova Categoria</h2>
+        <form id="categoryForm" class="space-y-4">
+          <div>
+            <label for="categoryName" class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+            <input id="categoryName" type="text" placeholder="Ex.: DevOps"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"/>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <label for="categoryColor" class="text-sm font-medium text-gray-700">Cor</label>
+            <input id="categoryColor" type="color"
+                   class="w-8 h-8 border border-gray-300 rounded-md cursor-pointer p-0" />
+          </div>
+
+          <button type="submit"
+                  class="bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition flex items-center gap-2">
+            <i data-lucide="plus" class="w-4 h-4"></i> Criar Categoria
+          </button>
+        </form>
+      </div>
+
+      <!-- Listagem -->
+      <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+        <h2 class="text-lg font-semibold mb-4 text-gray-800">Categorias Criadas</h2>
+        <div id="categoriesList" class="flex flex-wrap gap-2"></div>
+      </div>
     </div>
+
   </main>
   <div th:replace="~{fragments/admin/footer :: footer}"></div>
 </div>
 
 <script>lucide.createIcons();</script>
+<script>
+  let editingCategoryId = null;
+
+  function loadCategories() {
+      fetch('/api/v1/categories/all')
+          .then(response => response.json())
+          .then(data => {
+              const container = document.getElementById('categoriesList');
+              container.innerHTML = '';
+
+              data.forEach(category => {
+                  const pill = document.createElement('div');
+                  pill.className = 'flex items-center gap-2 px-3 py-1 rounded-full text-white text-sm font-medium';
+                  pill.style.backgroundColor = category.color || '#6b7280'; // default: gray-500
+                  pill.innerHTML = `
+                      ${category.name}
+                      <button class="ml-2 text-white/80 hover:text-white" onclick="editCategory(${category.id})">
+                          <i data-lucide="edit-3" class="w-4 h-4"></i>
+                      </button>
+                      <button class="text-white/80 hover:text-white" onclick="deleteCategory(${category.id})">
+                          <i data-lucide="trash" class="w-4 h-4"></i>
+                      </button>
+                  `;
+                  container.appendChild(pill);
+              });
+
+              lucide.createIcons(); // atualiza os ícones
+          })
+          .catch(err => {
+              console.error('Erro ao carregar categorias:', err);
+          });
+  }
+
+  function saveCategory(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('categoryName').value.trim();
+      const color = document.getElementById('categoryColor').value;
+
+      if (!name) {
+          swal("Aviso", "Por favor, informe o nome da categoria.", "warning");
+          return;
+      }
+
+      const category = { name, color };
+
+      const url = editingCategoryId
+          ? `/api/v1/categories/update/${editingCategoryId}`
+          : `/api/v1/categories/create`;
+      const method = editingCategoryId ? 'PUT' : 'POST';
+
+      fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(category)
+      })
+          .then(res => {
+              if (res.ok) {
+                  swal("Sucesso!", `Categoria ${editingCategoryId ? 'atualizada' : 'criada'} com sucesso!`, "success")
+                      .then(() => {
+                          editingCategoryId = null;
+                          clearForm();
+                          loadCategories();
+                      });
+              } else {
+                  swal("Erro!", "Não foi possível salvar a categoria.", "error");
+              }
+          });
+  }
+
+  function editCategory(id) {
+      fetch(`/api/v1/categories/${id}`)
+          .then(res => res.json())
+          .then(category => {
+              editingCategoryId = id;
+              document.getElementById('categoryName').value = category.name;
+              document.getElementById('categoryColor').value = category.color;
+          })
+          .catch(err => console.error('Erro ao carregar categoria:', err));
+  }
+
+  function deleteCategory(id) {
+      swal({
+          title: "Tem certeza?",
+          text: "Essa ação não poderá ser desfeita!",
+          icon: "warning",
+          buttons: ["Cancelar", "Sim, excluir!"],
+          dangerMode: true,
+      }).then((willDelete) => {
+          if (willDelete) {
+              fetch(`/api/v1/categories/delete/${id}`, {
+                  method: 'DELETE'
+              })
+                  .then(res => {
+                      if (res.ok) {
+                          swal("Categoria excluída com sucesso!", { icon: "success" })
+                              .then(() => loadCategories());
+                      } else {
+                          swal("Erro!", "Não foi possível excluir a categoria.", "error");
+                      }
+                  });
+          }
+      });
+  }
+
+  function clearForm() {
+      editingCategoryId = null;
+      document.getElementById('categoryName').value = '';
+      document.getElementById('categoryColor').value = '#3b82f6'; // azul padrão
+  }
+
+  document.getElementById('categoryForm').addEventListener('submit', saveCategory);
+  window.onload = loadCategories;
+</script>
 </body>
 </html>

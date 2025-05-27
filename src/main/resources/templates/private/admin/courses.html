@@ -36,12 +36,117 @@
           </li>
         </ol>
       </nav>
-      <h1 class="text-2xl font-semibold text-gray-800">Gerenciamento de Cursos</h1>
-      <p class="text-sm text-gray-500">
-        Aqui você pode cadastrar, editar e excluir cursos.
-      </p>
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h1 class="text-2xl font-semibold text-gray-800">Gerenciamento de Cursos</h1>
+          <p class="text-sm text-gray-500 mt-1">
+            Aqui você pode cadastrar, editar e excluir cursos.
+          </p>
+        </div>
+
+        <div class="flex gap-2 w-full md:w-auto">
+          <!-- Campo de pesquisa -->
+          <div class="relative w-full md:w-64">
+            <input
+                    type="text"
+                    placeholder="Buscar cursos..."
+                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
+            <i data-lucide="search" class="absolute left-3 top-2.5 w-5 h-5 text-gray-400"></i>
+          </div>
+
+          <!-- Botão de novo curso -->
+          <a
+                  href="/admin/courses/new"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white text-sm font-medium rounded-lg shadow hover:bg-emerald-400 transition"
+          >
+            <i data-lucide="plus-circle" class="w-5 h-5"></i>
+            Novo Curso
+          </a>
+        </div>
+      </div>
     </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Curso 1 -->
+      <div class="bg-white shadow rounded-xl p-6 space-y-4">
+        <div class="flex justify-between items-start">
+          <h2 class="text-xl font-semibold text-gray-800">Curso de Desenvolvimento Web</h2>
+          <span class="text-sm text-gray-500">Técnico</span>
+        </div>
+        <p class="text-sm text-gray-600">
+          Curso técnico que abrange lógica de programação, redes e desenvolvimento web.
+        </p>
+        <div class="flex justify-between text-sm text-gray-500">
+          <span>Duração: 3 anos</span>
+          <span>Turno: Manhã</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">HTML</span>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">CSS</span>
+          <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">JavaScript</span>
+        </div>
+      </div>
+
+      <!-- Curso 2 -->
+      <div class="bg-white shadow rounded-xl p-6 space-y-4">
+        <div class="flex justify-between items-start">
+          <h2 class="text-xl font-semibold text-gray-800">Sistemas para Internet</h2>
+          <span class="text-sm text-gray-500">Tecnólogo</span>
+        </div>
+        <p class="text-sm text-gray-600">
+          Formação superior voltada ao desenvolvimento de sistemas web, mobile e APIs REST.
+        </p>
+        <div class="flex justify-between text-sm text-gray-500">
+          <span>Duração: 2,5 anos</span>
+          <span>Turno: Noturno</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Node.js</span>
+          <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">React</span>
+          <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded-full">MongoDB</span>
+        </div>
+      </div>
+
+      <!-- Curso 3 -->
+      <div class="bg-white shadow rounded-xl p-6 space-y-4">
+        <div class="flex justify-between items-start">
+          <h2 class="text-xl font-semibold text-gray-800">Licenciatura em Computação</h2>
+          <span class="text-sm text-gray-500">Licenciatura</span>
+        </div>
+        <p class="text-sm text-gray-600">
+          Curso voltado à formação de professores com foco em pedagogia e fundamentos da computação.
+        </p>
+        <div class="flex justify-between text-sm text-gray-500">
+          <span>Duração: 4 anos</span>
+          <span>Turno: Integral</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Python</span>
+          <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Didática</span>
+          <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">Algoritmos</span>
+        </div>
+      </div>
+
+      <!-- Curso 4 -->
+      <div class="bg-white shadow rounded-xl p-6 space-y-4">
+        <div class="flex justify-between items-start">
+          <h2 class="text-xl font-semibold text-gray-800">Redes de Computadores</h2>
+          <span class="text-sm text-gray-500">Técnico</span>
+        </div>
+        <p class="text-sm text-gray-600">
+          Curso técnico voltado ao planejamento, instalação e manutenção de redes locais e cabeadas.
+        </p>
+        <div class="flex justify-between text-sm text-gray-500">
+          <span>Duração: 1,5 anos</span>
+          <span>Turno: Noturno</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">TCP/IP</span>
+          <span class="text-xs bg-gray-100 text-gray-800 px-2 py-1 rounded-full">Linux</span>
+          <span class="text-xs bg-lime-100 text-lime-800 px-2 py-1 rounded-full">Cabeamento</span>
+        </div>
+      </div>
     </div>
   </main>
   <div th:replace="~{fragments/admin/footer :: footer}"></div>
