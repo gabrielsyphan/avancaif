@@ -1,10 +1,10 @@
-package br.com.cpsoftware.avancaif.app.controller.api.register;
+package br.com.cpsoftware.avancaif.app.controller.api.user;
 
-import br.com.cpsoftware.avancaif.app.controller.api.register.data.RegisterNewUserRequest;
-import br.com.cpsoftware.avancaif.app.controller.api.register.data.RegisterNewUserResponse;
+import br.com.cpsoftware.avancaif.app.controller.api.user.data.RegisterNewUserRequest;
+import br.com.cpsoftware.avancaif.app.controller.api.user.data.RegisterNewUserResponse;
 import br.com.cpsoftware.avancaif.app.provider.mapstruct.UserMapper;
 import br.com.cpsoftware.avancaif.app.util.constant.PathApiConstants;
-import br.com.cpsoftware.avancaif.domain.usecase.CreateNewUserUseCase;
+import br.com.cpsoftware.avancaif.domain.usecase.user.CreateNewUserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

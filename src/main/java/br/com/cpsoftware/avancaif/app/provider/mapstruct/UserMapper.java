@@ -1,6 +1,6 @@
 package br.com.cpsoftware.avancaif.app.provider.mapstruct;
 
-import br.com.cpsoftware.avancaif.app.controller.api.register.data.RegisterNewUserResponse;
+import br.com.cpsoftware.avancaif.app.controller.api.user.data.RegisterNewUserResponse;
 import br.com.cpsoftware.avancaif.app.provider.postgres.model.UserModel;
 import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import org.mapstruct.Mapper;

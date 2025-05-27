@@ -1,4 +1,4 @@
-package br.com.cpsoftware.avancaif.app.controller.api.register.data;
+package br.com.cpsoftware.avancaif.app.controller.api.user.data;
 
 import java.util.Set;
 

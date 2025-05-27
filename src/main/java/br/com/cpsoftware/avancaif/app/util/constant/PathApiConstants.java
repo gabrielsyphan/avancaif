@@ -15,4 +15,11 @@ public class PathApiConstants {
 
     public static final String USERS_CREATE = "/create";
     public static final String API_V1_USERS_CREATE = API_V1_USERS + USERS_CREATE;
+    public static final String USERS_RETRIEVE_ALL = "/all";
+    public static final String API_V1_USERS_RETRIEVE_ALL = API_V1_USERS + USERS_RETRIEVE_ALL;
+
+    public static final String BADGES_CREATE = "/badges/create";
+    public static final String API_V1_BADGE_CREATE = API_V1 + BADGES_CREATE;
+    public static final String BADGES_RETRIEVE_ALL = "/badges/all";
+    public static final String API_V1_BADGES_RETRIEVE_ALL = API_V1 + BADGES_RETRIEVE_ALL;
 }

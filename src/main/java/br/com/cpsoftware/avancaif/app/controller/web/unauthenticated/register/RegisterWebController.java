@@ -1,4 +1,4 @@
-package br.com.cpsoftware.avancaif.app.controller.web.register;
+package br.com.cpsoftware.avancaif.app.controller.web.unauthenticated.register;
 
 import br.com.cpsoftware.avancaif.app.util.constant.PathWebConstants;
 import org.springframework.stereotype.Controller;

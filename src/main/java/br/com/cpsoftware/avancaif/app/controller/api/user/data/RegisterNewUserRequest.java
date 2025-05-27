@@ -1,4 +1,4 @@
-package br.com.cpsoftware.avancaif.app.controller.api.register.data;
+package br.com.cpsoftware.avancaif.app.controller.api.user.data;
 
 import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import br.com.cpsoftware.avancaif.domain.enums.Enabled;

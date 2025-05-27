@@ -14,17 +14,17 @@ public class UserModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, length = 60)
+    @Column(name = "password", nullable = false, length = 60)
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "varchar(1) default 'N'")
+    @Column(name = "enabled", nullable = false, columnDefinition = "varchar(1) default 'N'")
     private Enabled enabled;
 
     @ElementCollection(fetch = FetchType.EAGER)

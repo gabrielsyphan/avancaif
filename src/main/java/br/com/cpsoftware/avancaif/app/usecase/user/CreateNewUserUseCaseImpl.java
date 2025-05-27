@@ -1,10 +1,10 @@
-package br.com.cpsoftware.avancaif.app.usecase;
+package br.com.cpsoftware.avancaif.app.usecase.user;
 
 import br.com.cpsoftware.avancaif.app.handler.exception.UserAlreadyExistsException;
 import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import br.com.cpsoftware.avancaif.domain.provider.user.CheckIfUserExistsByEmailProvider;
 import br.com.cpsoftware.avancaif.domain.provider.user.CreateNewUserProvider;
-import br.com.cpsoftware.avancaif.domain.usecase.CreateNewUserUseCase;
+import br.com.cpsoftware.avancaif.domain.usecase.user.CreateNewUserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

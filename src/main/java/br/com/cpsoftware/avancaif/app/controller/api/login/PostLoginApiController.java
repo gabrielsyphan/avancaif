@@ -20,13 +20,13 @@ import br.com.cpsoftware.avancaif.app.provider.jwt.JwtUtil;
 
 @RestController
 @RequestMapping(PathApiConstants.API_V1_LOGIN)
-public class LoginApiController {
+public class PostLoginApiController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
     @Autowired
-    public LoginApiController(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public PostLoginApiController(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }

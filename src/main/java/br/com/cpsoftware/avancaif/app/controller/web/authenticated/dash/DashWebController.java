@@ -1,10 +1,9 @@
-package br.com.cpsoftware.avancaif.app.controller.web.dash;
+package br.com.cpsoftware.avancaif.app.controller.web.authenticated.dash;
 
 import br.com.cpsoftware.avancaif.app.util.constant.PathWebConstants;
 import br.com.cpsoftware.avancaif.domain.enums.Role;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DashWebController {
 
     @GetMapping
-    public String getPage(Model model, Authentication authentication) {
+    public String getPage(Authentication authentication) {
         return authentication.getAuthorities().stream()
                 .map(a -> Role.valueOf(a.getAuthority()))
                 .findFirst()

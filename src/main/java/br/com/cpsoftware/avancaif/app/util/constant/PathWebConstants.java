@@ -23,6 +23,6 @@ public class PathWebConstants {
     public static final String DASH = "/dash";
     public static final String DASH_PAGE = "dash.html";
 
-    public static final String USERS = "/users";
-    public static final String LIST_USERS_PAGE = DASH + "/user/list.html";
+    public static final String ADMIN_BADGES = "/admin/badges";
+    public static final String ADMIN_BADGES_PAGE = ADMIN_PATH + "badges.html";
 }

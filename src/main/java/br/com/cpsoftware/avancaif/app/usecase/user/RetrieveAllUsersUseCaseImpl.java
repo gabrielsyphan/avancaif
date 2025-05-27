@@ -1,8 +1,8 @@
-package br.com.cpsoftware.avancaif.app.usecase;
+package br.com.cpsoftware.avancaif.app.usecase.user;
 
 import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import br.com.cpsoftware.avancaif.domain.provider.user.RetrieveAllUsersProvider;
-import br.com.cpsoftware.avancaif.domain.usecase.RetrieveAllUsersUseCase;
+import br.com.cpsoftware.avancaif.domain.usecase.user.RetrieveAllUsersUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 @Service
 public class RetrieveAllUsersUseCaseImpl implements RetrieveAllUsersUseCase {
 
-    private final RetrieveAllUsersProvider retrieveAllUsersProvider;
     private final Logger logger = Logger.getLogger(RetrieveAllUsersUseCaseImpl.class.getName());
+    private final RetrieveAllUsersProvider retrieveAllUsersProvider;
 
     @Autowired
     public RetrieveAllUsersUseCaseImpl(RetrieveAllUsersProvider retrieveAllUsersProvider) {

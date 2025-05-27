@@ -1,4 +1,4 @@
-package br.com.cpsoftware.avancaif.app.controller.web.home;
+package br.com.cpsoftware.avancaif.app.controller.web.unauthenticated.home;
 
 import br.com.cpsoftware.avancaif.app.util.constant.PathWebConstants;
 import org.springframework.web.bind.annotation.GetMapping;
