@@ -1,121 +1,142 @@
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Cadastro de Badges | AvancaIF</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://unpkg.com/lucide@latest"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
-        <style>
-            body { font-family: 'Poppins', sans-serif; }
-            select[multiple] option:checked {
-              background-color: #2563eb;
-              color: white;
-            }
-        </style>
-    </head>
-    <body class="bg-gray-50 min-h-screen flex flex-col">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cadastro de Badges | AvancaIF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        select[multiple] option:checked {
+          background-color: #2563eb;
+          color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex">
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow-sm py-4">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <a href="/" class="text-2xl font-semibold text-gray-800">Avanca<span class="text-blue-600">IF</span></a>
-            <div class="space-x-4">
-                <a href="/dash" class="text-gray-700 font-medium hover:text-blue-600 transition">Dashboard</a>
-                <a href="javascript:void(0);" onclick="logout()" class="text-gray-700 font-medium hover:text-blue-600 transition">Sair</a>
+<!-- Sidebar -->
+<aside class="w-64 bg-white shadow-md flex flex-col justify-between">
+    <div>
+        <div class="flex items-center gap-2 px-6 py-5 border-b">
+            <a href="/dash" class="text-2xl font-semibold text-gray-800">Avanca<span class="text-blue-600">IF</span></a>
+        </div>
+
+        <nav class="px-4 py-6 space-y-2">
+            <a href="/dash" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
+                <i data-lucide="home" class="w-5 h-5"></i> Dashboard
+            </a>
+            <a href="/admin/cursos" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
+                <i data-lucide="book-open" class="w-5 h-5"></i> Gerenciar Cursos
+            </a>
+            <a href="/admin/projetos" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
+                <i data-lucide="code" class="w-5 h-5"></i> Gerenciar Projetos
+            </a>
+            <a href="/admin/badges" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-blue-50 text-blue-600">
+                <i data-lucide="award" class="w-5 h-5"></i> Gerenciar Badges
+            </a>
+            <a href="/admin/categorias" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
+                <i data-lucide="layers" class="w-5 h-5"></i> Gerenciar Categorias
+            </a>
+            <a href="/admin/avaliadores" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
+                <i data-lucide="users" class="w-5 h-5"></i> Gerenciar Avaliadores
+            </a>
+        </nav>
+    </div>
+
+    <div class="flex items-center gap-3 px-6 py-4 border-t">
+        <img src="https://api.dicebear.com/8.x/thumbs/svg?seed=admin" alt="User" class="w-10 h-10 rounded-full border border-gray-300"/>
+        <div>
+            <p class="text-sm font-medium text-gray-800">Administrador</p>
+            <button onclick="logout()" class="text-xs text-red-500 hover:underline">Sair</button>
+        </div>
+    </div>
+</aside>
+
+<!-- Conteúdo Principal -->
+<div class="flex-1 flex flex-col">
+
+    <main class="px-8 py-8 space-y-12">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Formulário -->
+            <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
+                <h2 class="text-lg font-semibold mb-4 text-gray-800">Informações da Badge</h2>
+
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                        <input type="text" placeholder="Ex.: Explorador de Desafios"
+                               class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"/>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+                        <textarea placeholder="Descreva como essa badge é conquistada..."
+                                  class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
+                                  rows="3"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tecnologias Associadas</label>
+                        <select multiple
+                                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+                            <option>Backend</option>
+                            <option>Frontend</option>
+                            <option>BI</option>
+                            <option>DevOps</option>
+                            <option>Machine Learning</option>
+                            <option>Mobile</option>
+                            <option>Game Dev</option>
+                            <option>Segurança</option>
+                        </select>
+                        <p class="text-xs text-gray-500 mt-1">Segure CTRL (ou CMD) para selecionar múltiplos.</p>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <button type="button"
+                                onclick="generateImage()"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition flex items-center gap-2">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Gerar Ícone
+                        </button>
+
+                        <button type="button"
+                                onclick="saveBadge()"
+                                class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition">
+                            Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Preview -->
+            <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100 text-center flex flex-col justify-center items-center space-y-4">
+                <div class="w-28 h-28 bg-gray-100 rounded-full flex items-center justify-center border border-gray-300 overflow-hidden">
+                    <img id="badgePreview" src="https://api.dicebear.com/8.x/bottts/svg?seed=placeholder" alt="Preview" class="w-full h-full object-cover"/>
+                </div>
+                <h3 class="text-lg font-medium text-gray-800">Preview da Badge</h3>
+                <p class="text-sm text-gray-500">A pré-visualização da badge aparecerá aqui.</p>
             </div>
         </div>
-    </nav>
 
-    <!-- Conteúdo -->
-    <main class="max-w-7xl mx-auto px-6 py-12 space-y-12">
+        <!-- Lista -->
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Badges Criadas</h2>
 
-        <div class="container mx-auto px-4 space-y-10">
-        <h1 class="text-2xl font-semibold text-gray-800">Cadastro de Badges</h1>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Formulário de Cadastro -->
-                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
-                    <h2 class="text-lg font-semibold mb-4 text-gray-800">Informações da Badge</h2>
-
-                    <form class="space-y-4">
-                        <!-- Título -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Título</label>
-                            <input type="text" placeholder="Ex.: Explorador de Desafios"
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm" />
-                        </div>
-
-                        <!-- Descrição -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
-                            <textarea placeholder="Descreva como essa badge é conquistada..."
-                                      class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm"
-                                      rows="3"></textarea>
-                        </div>
-
-                        <!-- Tecnologias -->
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Tecnologias Associadas</label>
-                            <select multiple
-                                    class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
-                                <option>Backend</option>
-                                <option>Frontend</option>
-                                <option>BI</option>
-                                <option>DevOps</option>
-                                <option>Machine Learning</option>
-                                <option>Mobile</option>
-                                <option>Game Dev</option>
-                                <option>Segurança</option>
-                            </select>
-                            <p class="text-xs text-gray-500 mt-1">Segure CTRL (ou CMD) para selecionar múltiplos.</p>
-                        </div>
-
-                        <!-- Botões -->
-                        <div class="flex items-center gap-4">
-                            <button type="button"
-                                    onclick="generateImage()"
-                                    class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition flex items-center gap-2">
-                                <i data-lucide="refresh-cw" class="w-4 h-4"></i> Gerar Ícone
-                            </button>
-
-                            <button type="button"
-                                    onclick="saveBadge()"
-                                    class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition">
-                                Salvar
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Preview da Badge -->
-                <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100 text-center flex flex-col justify-center items-center space-y-4">
-                    <div class="w-28 h-28 bg-gray-100 rounded-full flex items-center justify-center border border-gray-300 overflow-hidden">
-                        <img id="badgePreview" src="https://api.dicebear.com/8.x/bottts/svg?seed=placeholder" alt="Preview" class="w-full h-full object-cover"/>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-800">Preview da Badge</h3>
-                    <p class="text-sm text-gray-500">A pré-visualização da badge aparecerá aqui.</p>
-                </div>
-            </div>
-
-            <!-- Lista de Badges -->
-            <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
-                <h2 class="text-lg font-semibold text-gray-800 mb-4">Badges Criadas</h2>
-
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200 text-sm">
-                        <thead class="bg-gray-50 text-gray-600 font-medium">
-                        <tr>
-                            <th class="px-4 py-2 text-left">Título</th>
-                            <th class="px-4 py-2 text-left">Descrição</th>
-                            <th class="px-4 py-2 text-left">Tecnologias</th>
-                            <th class="px-4 py-2 text-left">Ações</th>
-                        </tr>
-                        </thead>
-                        <tbody id="badgesTableBody" class="divide-y divide-gray-100 text-gray-700"></tbody>
-                    </table>
-                </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
+                    <thead class="bg-gray-50 text-gray-600 font-medium">
+                    <tr>
+                        <th class="px-4 py-2 text-left">Título</th>
+                        <th class="px-4 py-2 text-left">Descrição</th>
+                        <th class="px-4 py-2 text-left">Tecnologias</th>
+                        <th class="px-4 py-2 text-left">Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody id="badgesTableBody" class="divide-y divide-gray-100 text-gray-700"></tbody>
+                </table>
             </div>
         </div>
 
@@ -126,81 +147,81 @@
         <p>&copy; 2025 AvancaIF. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Script DiceBear -->
-    <script>
-        function generateImage() {
-          const seed = Math.random().toString(36).substring(7);
-          document.getElementById('badgePreview').src =
+</div>
+
+<!-- Scripts -->
+<script>
+    function generateImage() {
+        const seed = Math.random().toString(36).substring(7);
+        document.getElementById('badgePreview').src =
             `https://api.dicebear.com/8.x/bottts/svg?seed=${seed}`;
-        }
+    }
 
-        lucide.createIcons();
+    function saveBadge() {
+        const title = document.querySelector('input[placeholder="Ex.: Explorador de Desafios"]').value;
+        const description = document.querySelector('textarea').value;
+        const select = document.querySelector('select');
+        const technologies = Array.from(select.selectedOptions).map(opt => opt.value);
+        const imageUrl = document.getElementById('badgePreview').src;
 
-        function saveBadge() {
-            const title = document.querySelector('input[placeholder="Ex.: Explorador de Desafios"]').value;
-            const description = document.querySelector('textarea').value;
-            const select = document.querySelector('select');
-            const technologies = Array.from(select.selectedOptions).map(opt => opt.value);
-            const imageUrl = document.getElementById('badgePreview').src;
+        const badge = {
+            title,
+            description,
+            technologies,
+            imageUrl
+        };
 
-            const badge = {
-                title,
-                description,
-                technologies,
-                imageUrl
-            };
-
-            fetch('/api/v1/badges/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(badge)
-            })
-            .then(res => {
-                if (res.ok) {
-                      swal("Sucesso!", "Badge salva com sucesso!!", "success").then(() => {
-                        location.reload();
-                      });
-                } else {
-                    swal("Erro!", "Não foi possível salvar a badge. Tente novamente.", "error");
-                }
-            });
-        }
-    </script>
-    <script>
-        function loadBadges() {
-            fetch('/api/v1/badges/all')
-                .then(response => response.json())
-                .then(badges => {
-                    const tbody = document.getElementById('badgesTableBody');
-                    tbody.innerHTML = '';
-
-                    badges.forEach(badge => {
-                        const row = document.createElement('tr');
-
-                        row.innerHTML = `
-                            <td class="px-4 py-2 flex items-center gap-2">
-                                <img src="${badge.imageUrl}" alt="Badge" class="w-8 h-8 rounded-full border border-gray-300"/>
-                                <span>${badge.title}</span>
-                            </td>
-                            <td class="px-4 py-2">${badge.description}</td>
-                            <td class="px-4 py-2">${badge.technologies.join(', ')}</td>
-                            <td class="px-4 py-2 space-x-2">
-                                <button class="text-blue-600 hover:underline text-sm" onclick="editBadge(${badge.id})">Editar</button>
-                                <button class="text-red-600 hover:underline text-sm" onclick="deleteBadge(${badge.id})">Excluir</button>
-                            </td>
-                        `;
-
-                        tbody.appendChild(row);
-                    });
-                })
-                .catch(err => {
-                    console.error('Erro ao carregar badges:', err);
+        fetch('/api/v1/badges/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(badge)
+        })
+        .then(res => {
+            if (res.ok) {
+                swal("Sucesso!", "Badge salva com sucesso!!", "success").then(() => {
+                    location.reload();
                 });
-        }
+            } else {
+                swal("Erro!", "Não foi possível salvar a badge. Tente novamente.", "error");
+            }
+        });
+    }
 
-        window.onload = loadBadges;
-    </script>
-    </body>
-    </html>
+    function loadBadges() {
+        fetch('/api/v1/badges/all')
+            .then(response => response.json())
+            .then(badges => {
+                const tbody = document.getElementById('badgesTableBody');
+                tbody.innerHTML = '';
+
+                badges.forEach(badge => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td class="px-4 py-2 flex items-center gap-2">
+                            <img src="${badge.imageUrl}" alt="Badge" class="w-8 h-8 rounded-full border border-gray-300"/>
+                            <span>${badge.title}</span>
+                        </td>
+                        <td class="px-4 py-2">${badge.description}</td>
+                        <td class="px-4 py-2">${badge.technologies.join(', ')}</td>
+                        <td class="px-4 py-2 space-x-2">
+                            <button class="text-blue-600 hover:underline text-sm" onclick="editBadge(${badge.id})">Editar</button>
+                            <button class="text-red-600 hover:underline text-sm" onclick="deleteBadge(${badge.id})">Excluir</button>
+                        </td>
+                    `;
+
+                    tbody.appendChild(row);
+                });
+            })
+            .catch(err => console.error('Erro ao carregar badges:', err));
+    }
+
+    function logout() {
+        window.location.href = "/logout";
+    }
+
+    window.onload = loadBadges;
+    lucide.createIcons();
+</script>
+</body>
+</html>
