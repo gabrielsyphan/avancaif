@@ -20,6 +20,13 @@ public class PathApiConstants {
 
     public static final String BADGES_CREATE = "/badges/create";
     public static final String API_V1_BADGE_CREATE = API_V1 + BADGES_CREATE;
+
     public static final String BADGES_RETRIEVE_ALL = "/badges/all";
     public static final String API_V1_BADGES_RETRIEVE_ALL = API_V1 + BADGES_RETRIEVE_ALL;
+
+    public static final String BADGES_UPDATE = "/badges/update";
+    public static final String API_V1_BADGES_UPDATE = API_V1 + BADGES_UPDATE;
+
+    public static final String BADGES_DELETE = "/badges/delete";
+    public static final String API_V1_BADGES_DELETE = API_V1 + BADGES_DELETE;
 }

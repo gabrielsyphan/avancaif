@@ -19,4 +19,15 @@ public record CreateNewBadgeRequest(
             imageUrl
         );
     }
+
+    public BadgeEntity toBadgeEntity(Long id) {
+        var badge = new BadgeEntity(
+            title,
+            description,
+            technologies,
+            imageUrl
+        );
+        badge.setId(id);
+        return badge;
+    }
 }
