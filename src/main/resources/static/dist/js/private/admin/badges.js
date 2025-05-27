@@ -110,14 +110,19 @@ function loadBadges() {
                 </td>
                 <td class="px-4 py-2">${badge.description}</td>
                 <td class="px-4 py-2">${badge.technologies.join(', ')}</td>
-                <td class="px-4 py-2 space-x-2">
-                    <button class="text-blue-600 hover:underline text-sm" onclick="editBadge(${badge.id})">Editar</button>
-                    <button class="text-red-600 hover:underline text-sm" onclick="deleteBadge(${badge.id})">Excluir</button>
+                <td class="px-4 py-2 flex items-center gap-3">
+                    <button onclick="editBadge(${badge.id})" class="text-yellow-500 hover:text-yellow-600 transition" title="Editar">
+                        <i data-lucide="edit" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="deleteBadge(${badge.id})" class="text-red-500 hover:text-red-600 transition" title="Excluir">
+                        <i data-lucide="trash" class="w-4 h-4"></i>
+                    </button>
                 </td>
             `;
 
             tbody.appendChild(row);
         });
+        lucide.createIcons();
     })
     .catch(err => console.error('Erro ao carregar badges:', err));
 }

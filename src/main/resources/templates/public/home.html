@@ -8,69 +8,246 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { font-family: 'Poppins', sans-serif; }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+  <link rel="stylesheet" href="/dist/css/home.css" />
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
-<!-- Navbar -->
-<nav class="bg-white shadow-sm py-4">
-  <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-    <a href="/" class="text-2xl font-semibold text-gray-800">Avanca<span class="text-blue-600">IF</span></a>
+<nav id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="/" class="text-2xl font-semibold text-gray-800">Avanca<span class="text-blue-500">IF</span></a>
     <div class="space-x-4">
-      <a href="/login" id="login-nav-btn" class="text-gray-700 font-medium hover:text-blue-600 transition">Login</a>
+      <a href="/login" id="login-nav-btn" class="text-gray-700 font-medium hover:text-blue-500 transition">Login</a>
       <a href="/register" id="register-nav-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
         Register
       </a>
       <a href="/dash" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition" id="home-nav-btn" style="display: none;">Acessar</a>
-      <a href="javascript:void(0);" onclick="logout()" class="text-gray-700 font-medium hover:text-blue-600 transition" id="logout-nav-btn" style="display: none;">Sair</a>
+      <a href="javascript:void(0);" onclick="logout()" class="text-gray-700 font-medium hover:text-blue-500 transition" id="logout-nav-btn" style="display: none;">Sair</a>
     </div>
   </div>
 </nav>
 
-<!-- Hero -->
-<section class="flex-grow flex items-center justify-center text-center px-6 py-16">
+<section class="relative flex-grow flex items-center justify-center text-center px-6 pt-32 pb-20 overflow-hidden">
+  <div id="tsparticles" class="absolute top-0 left-0 w-full h-full -z-10"></div>
   <div class="max-w-2xl">
-    <h1 class="text-4xl font-bold text-gray-800 mb-4">Avance na sua carreira com o <span class="text-blue-600">AvancaIF</span></h1>
+    <h1 class="text-4xl font-bold text-gray-800 mb-4">
+      Avance na sua carreira com o <span class="text-blue-500">AvancaIF</span>
+    </h1>
     <p class="text-gray-600 text-lg mb-8">
       Descubra badges, projetos práticos e cursos personalizados. Aprenda e evolua no seu ritmo.
     </p>
     <div class="flex justify-center gap-4">
-      <a href="/register" id="login-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Comece agora</a>
-      <a href="/login" id="register-btn" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition">Já tenho conta</a>
-      <a href="/dash" id="home-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition" style="display: none">Acessar</a>
+      <a href="/register" id="login-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+        Comece agora
+      </a>
+      <a href="/login" id="register-btn" class="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-500 transition">
+        Já tenho conta
+      </a>
+      <a href="/dash" id="home-btn" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition" style="display: none">
+        Acessar
+      </a>
     </div>
   </div>
 </section>
 
-<!-- Features -->
 <section class="py-12 bg-white">
   <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
     <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-      <i data-lucide="award" class="w-8 h-8 mx-auto text-blue-600 mb-3"></i>
-      <h3 class="text-lg font-semibold text-gray-800 mb-1">Badges</h3>
-      <p class="text-sm text-gray-600">Acompanhe seus marcos de aprendizado e conquiste novas insígnias.</p>
+      <i data-lucide="award" class="w-8 h-8 mx-auto text-blue-500 mb-3"></i>
+      <h3 class="text-lg font-semibold text-gray-800 mb-1">Emblemas</h3>
+      <p class="text-sm text-gray-600">Acompanhe seus marcos de aprendizado e conquiste novos emblemas.</p>
     </div>
     <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-      <i data-lucide="code" class="w-8 h-8 mx-auto text-blue-600 mb-3"></i>
+      <i data-lucide="code" class="w-8 h-8 mx-auto text-blue-500 mb-3"></i>
       <h3 class="text-lg font-semibold text-gray-800 mb-1">Projetos</h3>
       <p class="text-sm text-gray-600">Pratique com desafios reais e projetos guiados para consolidar seus conhecimentos.</p>
     </div>
     <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-      <i data-lucide="book-open" class="w-8 h-8 mx-auto text-blue-600 mb-3"></i>
+      <i data-lucide="book-open" class="w-8 h-8 mx-auto text-blue-500 mb-3"></i>
       <h3 class="text-lg font-semibold text-gray-800 mb-1">Cursos</h3>
       <p class="text-sm text-gray-600">Aprenda com conteúdos selecionados por especialistas e expanda sua base técnica.</p>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="py-6 text-center text-sm text-gray-500">
+<section class="py-16 bg-gray">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">Como funciona o AvancaIF?</h2>
+    <div class="grid md:grid-cols-3 gap-8 text-left">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-blue-500 mb-2">1. Inscreva-se</h3>
+        <p class="text-gray-600">Crie sua conta e escolha os caminhos de aprendizado que mais combinam com seus objetivos.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-blue-500 mb-2">2. Pratique</h3>
+        <p class="text-gray-600">Resolva desafios, participe de projetos e acompanhe seu progresso de forma interativa.</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-semibold text-blue-500 mb-2">3. Conquiste</h3>
+        <p class="text-gray-600">Ganhe emblemas por habilidades adquiridas e monte seu portfólio técnico.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-white">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-12">O que estão dizendo</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-gray-100 p-6 rounded-lg shadow">
+        <p class="text-gray-700 italic">“O AvancaIF me ajudou a montar meu primeiro portfólio e conquistar um estágio em TI!”</p>
+        <p class="mt-4 text-blue-500 font-semibold">— Maria F., Estudante de Análise e Desenvolvimento</p>
+      </div>
+      <div class="bg-gray-100 p-6 rounded-lg shadow">
+        <p class="text-gray-700 italic">“Simples, intuitivo e com projetos que realmente ensinam. A ideia dos emblemas é sensacional!”</p>
+        <p class="mt-4 text-blue-500 font-semibold">— João L., Desenvolvedor Júnior</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-gray">
+  <div class="max-w-6xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">Tecnologias que você <span class="text-blue-500">pode aprender</span></h2>
+    <p class="text-gray-600 mb-12 max-w-2xl mx-auto">Escolha o que aprender com base nos seus interesses e objetivos: linguagens, ferramentas de análise, gestão e muito mais.</p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-left">
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" class="w-8 h-8">
+        <span class="text-gray-800 font-semibold">HTML</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" class="w-8 h-8">
+        <span class="text-gray-800 font-semibold">CSS</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" class="w-8 h-8">
+        <span class="text-gray-800 font-semibold">JavaScript</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java" class="w-8 h-8">
+        <span class="text-gray-800 font-semibold">Java</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" class="w-8 h-8">
+        <span class="text-gray-800 font-semibold">Python</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL" class="w-8 h-8">
+        <span class="text-gray-800 font-semibold">MySQL</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" class="w-8 h-8">
+        <span class="text-gray-800 font-semibold">Power BI</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <span class="text-blue-500 text-2xl">🤖</span>
+        <span class="text-gray-800 font-semibold">Machine Learning</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <span class="text-red-600 text-2xl">🛡️</span>
+        <span class="text-gray-800 font-semibold">Cyber Security</span>
+      </div>
+      <div class="bg-white p-4 rounded-lg shadow flex items-center gap-4">
+        <span class="text-green-600 text-2xl">📊</span>
+        <span class="text-gray-800 font-semibold">Gestão de Projetos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-white">
+  <div class="max-w-3xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Perguntas Frequentes</h2>
+    <div class="space-y-6">
+      <div>
+        <h3 class="font-semibold text-blue-500">O AvancaIF é gratuito?</h3>
+        <p class="text-gray-700">Sim! O acesso à maioria dos cursos e funcionalidades é totalmente gratuito.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-blue-500">Os emblemas têm validade no mercado?</h3>
+        <p class="text-gray-700">Eles funcionam como um portfólio técnico e podem ser adicionados ao seu LinkedIn ou currículo.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-blue-500">Preciso ter conhecimento prévio?</h3>
+        <p class="text-gray-700">Não! Temos trilhas para iniciantes e também para quem já possui experiência.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-blue-600 text-white text-center">
+  <div class="max-w-2xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-4">Pronto para acelerar sua jornada?</h2>
+    <p class="mb-8">Crie sua conta gratuitamente e comece hoje mesmo.</p>
+    <a href="/register" class="bg-white text-blue-500 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+      Começar agora
+    </a>
+  </div>
+</section>
+
+<footer class="py-6 text-center bg-white text-sm text-gray-500">
   <p>&copy; 2025 AvancaIF. Todos os direitos reservados.</p>
 </footer>
 
 <script src="/dist/js/home.js"></script>
 <script>lucide.createIcons();</script>
+<script>
+  tsParticles.load("tsparticles", {
+    background: {
+      color: { value: "#f9fafb" }
+    },
+    fpsLimit: 60,
+    particles: {
+      number: {
+        value: 50,
+        density: { enable: true, area: 800 }
+      },
+      color: { value: "#3b82f6" },
+      shape: { type: "circle" },
+      opacity: {
+        value: 0.3
+      },
+      size: {
+        value: { min: 1, max: 3 }
+      },
+      move: {
+        enable: true,
+        speed: 0.5,
+        direction: "none",
+        random: true,
+        straight: false,
+        outModes: { default: "out" }
+      },
+      links: {
+        enable: true,
+        distance: 120,
+        color: "#3b82f6",
+        opacity: 0.2,
+        width: 1
+      }
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "repulse" },
+        onClick: { enable: false },
+        resize: true
+      },
+      modes: {
+        repulse: { distance: 70, duration: 0.4 }
+      }
+    },
+    detectRetina: true
+  });
+
+  window.addEventListener("scroll", () => {
+    const navbar = document.getElementById("navbar");
+    if (window.scrollY > 20) {
+      navbar.classList.add("scrolled");
+    } else {
+      navbar.classList.remove("scrolled");
+    }
+  });
+</script>
 </body>
 </html>
