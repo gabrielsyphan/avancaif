@@ -25,4 +25,19 @@ public class PathWebConstants {
 
     public static final String ADMIN_BADGES = "/admin/badges";
     public static final String ADMIN_BADGES_PAGE = ADMIN_PATH + "badges.html";
+
+    public static final String ADMIN_CATEGORIES = "/admin/categories";
+    public static final String ADMIN_CATEGORIES_PAGE = ADMIN_PATH + "categories.html";
+
+    public static final String ADMIN_COURSES = "/admin/courses";
+    public static final String ADMIN_COURSES_PAGE = ADMIN_PATH + "courses.html";
+
+    public static final String ADMIN_EVALUATORS = "/admin/evaluators";
+    public static final String ADMIN_EVALUATORS_PAGE = ADMIN_PATH + "evaluators.html";
+
+    public static final String ADMIN_PROJECTS = "/admin/projects";
+    public static final String ADMIN_PROJECTS_PAGE = ADMIN_PATH + "projects.html";
+
+    public static final String ADMIN_REPORTS = "/admin/reports";
+    public static final String ADMIN_REPORTS_PAGE = ADMIN_PATH + "reports.html";
 }

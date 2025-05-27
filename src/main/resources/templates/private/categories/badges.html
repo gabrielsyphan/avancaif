@@ -20,26 +20,13 @@
 
 <div th:replace="~{fragments/admin/sidebar :: sidebar(currentUri=${currentUri})}"></div>
 
+<!-- Conteúdo Principal -->
 <div class="flex-1 flex flex-col ml-64">
-    <main class="px-8 py-8 space-y-6">
-        <div class="flex flex-col gap-2">
-            <nav class="text-sm text-gray-500" aria-label="Breadcrumb">
-                <ol class="list-none p-0 inline-flex space-x-2">
-                    <li class="flex items-center">
-                        <a href="/admin/dash" class="hover:text-blue-600">Dashboard</a>
-                        <svg class="w-3 h-3 mx-2 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </li>
-                    <li class="flex items-center">
-                        <a href="/admin/badges" class="hover:text-blue-600">Badges</a>
-                    </li>
-                </ol>
-            </nav>
-            <h1 class="text-2xl font-semibold text-gray-800">Cadastro de Badges</h1>
-            <p class="text-sm text-gray-500">Gerencie as badges do sistema. Crie, edite e visualize as existentes.</p>
-        </div>
+
+    <main class="px-8 py-8 space-y-12">
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Formulário -->
             <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
                 <h2 class="text-lg font-semibold mb-4 text-gray-800">Informações da Badge</h2>
 
@@ -89,6 +76,7 @@
                 </form>
             </div>
 
+            <!-- Preview -->
             <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100 text-center flex flex-col justify-center items-center space-y-4">
                 <div class="w-28 h-28 bg-gray-100 rounded-full flex items-center justify-center border border-gray-300 overflow-hidden">
                     <img id="badgePreview" src="https://api.dicebear.com/8.x/bottts/svg?seed=placeholder" alt="Preview" class="w-full h-full object-cover"/>
@@ -98,8 +86,10 @@
             </div>
         </div>
 
+        <!-- Lista -->
         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100">
             <h2 class="text-lg font-semibold text-gray-800 mb-4">Badges Criadas</h2>
+
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50 text-gray-600 font-medium">
@@ -114,8 +104,14 @@
                 </table>
             </div>
         </div>
+
     </main>
-    <div th:replace="~{fragments/admin/footer :: footer}"></div>
+
+    <!-- Footer -->
+    <footer class="py-6 text-center text-sm text-gray-500">
+        <p>&copy; 2025 AvancaIF. Todos os direitos reservados.</p>
+    </footer>
+
 </div>
 <script>lucide.createIcons();</script>
 </body>

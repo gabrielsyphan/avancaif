@@ -12,31 +12,37 @@
                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
                th:classappend="${currentUri == '/admin/courses'} ? 'bg-blue-50 text-blue-600'">
                 <i data-lucide="book-open" class="w-5 h-5"
-                   th:classappend="${currentUri == '/admin/courses'} ? 'text-blue-600'"></i> Gerenciar Cursos
+                   th:classappend="${currentUri == '/admin/courses'} ? 'text-blue-600'"></i> Cursos
             </a>
             <a href="/admin/projects"
                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
                th:classappend="${currentUri == '/admin/projects'} ? 'bg-blue-50 text-blue-600'">
                 <i data-lucide="code" class="w-5 h-5"
-                   th:classappend="${currentUri == '/admin/projects'} ? 'text-blue-600'"></i> Gerenciar Projetos
+                   th:classappend="${currentUri == '/admin/projects'} ? 'text-blue-600'"></i> Projetos
             </a>
             <a href="/admin/badges"
                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
                th:classappend="${currentUri == '/admin/badges'} ? 'bg-blue-50 text-blue-600'">
                 <i data-lucide="award" class="w-5 h-5"
-                   th:classappend="${currentUri == '/admin/badges'} ? 'text-blue-600'"></i> Gerenciar Badges
+                   th:classappend="${currentUri == '/admin/badges'} ? 'text-blue-600'"></i> Badges
             </a>
             <a href="/admin/categories"
                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
                th:classappend="${currentUri == '/admin/categories'} ? 'bg-blue-50 text-blue-600'">
                 <i data-lucide="layers" class="w-5 h-5"
-                   th:classappend="${currentUri == '/admin/categories'} ? 'text-blue-600'"></i> Gerenciar Categorias
+                   th:classappend="${currentUri == '/admin/categories'} ? 'text-blue-600'"></i> Categorias
             </a>
-            <a href="/admin/users"
+            <a href="/admin/evaluators"
                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
-               th:classappend="${currentUri == '/admin/users'} ? 'bg-blue-50 text-blue-600'">
+               th:classappend="${currentUri == '/admin/evaluators'} ? 'bg-blue-50 text-blue-600'">
                 <i data-lucide="users" class="w-5 h-5"
-                   th:classappend="${currentUri == '/admin/users'} ? 'text-blue-600'"></i> Gerenciar Avaliadores
+                   th:classappend="${currentUri == '/admin/evaluators'} ? 'text-blue-600'"></i> Avaliadores
+            </a>
+            <a href="/admin/reports"
+                class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700"
+                th:classappend="${currentUri == '/admin/reports'} ? 'bg-blue-50 text-blue-600'">
+                 <i data-lucide="bar-chart" class="w-5 h-5"
+                     th:classappend="${currentUri == '/admin/reports'} ? 'text-blue-600'"></i> Relatórios
             </a>
         </nav>
     </div>
