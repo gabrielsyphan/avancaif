@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/dist/js/private/admin/badges.js"></script>
     <style>
         body { font-family: 'Poppins', sans-serif; }
         select[multiple] option:checked {
@@ -17,46 +18,10 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex">
 
-<!-- Sidebar -->
-<aside class="w-64 bg-white shadow-md flex flex-col justify-between">
-    <div>
-        <div class="flex items-center gap-2 px-6 py-5 border-b">
-            <a href="/dash" class="text-2xl font-semibold text-gray-800">Avanca<span class="text-blue-600">IF</span></a>
-        </div>
-
-        <nav class="px-4 py-6 space-y-2">
-            <a href="/dash" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
-                <i data-lucide="home" class="w-5 h-5"></i> Dashboard
-            </a>
-            <a href="/admin/cursos" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
-                <i data-lucide="book-open" class="w-5 h-5"></i> Gerenciar Cursos
-            </a>
-            <a href="/admin/projetos" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
-                <i data-lucide="code" class="w-5 h-5"></i> Gerenciar Projetos
-            </a>
-            <a href="/admin/badges" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-blue-50 text-blue-600">
-                <i data-lucide="award" class="w-5 h-5"></i> Gerenciar Badges
-            </a>
-            <a href="/admin/categorias" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
-                <i data-lucide="layers" class="w-5 h-5"></i> Gerenciar Categorias
-            </a>
-            <a href="/admin/avaliadores" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-blue-50 text-gray-700">
-                <i data-lucide="users" class="w-5 h-5"></i> Gerenciar Avaliadores
-            </a>
-        </nav>
-    </div>
-
-    <div class="flex items-center gap-3 px-6 py-4 border-t">
-        <img src="https://api.dicebear.com/8.x/thumbs/svg?seed=admin" alt="User" class="w-10 h-10 rounded-full border border-gray-300"/>
-        <div>
-            <p class="text-sm font-medium text-gray-800">Administrador</p>
-            <button onclick="logout()" class="text-xs text-red-500 hover:underline">Sair</button>
-        </div>
-    </div>
-</aside>
+<div th:replace="~{fragments/sidebar :: sidebar(currentUri=${currentUri})}"></div>
 
 <!-- Conteúdo Principal -->
-<div class="flex-1 flex flex-col">
+<div class="flex-1 flex flex-col ml-64">
 
     <main class="px-8 py-8 space-y-12">
 
@@ -148,173 +113,6 @@
     </footer>
 
 </div>
-
-<!-- Scripts -->
-<!-- Adicione dentro da tag <script> já existente no seu HTML -->
-
-<script>
-    let editingBadgeId = null;
-
-    function generateImage() {
-        const seed = Math.random().toString(36).substring(7);
-        document.getElementById('badgePreview').src =
-            `https://api.dicebear.com/8.x/bottts/svg?seed=${seed}`;
-    }
-
-    function saveBadge() {
-        const title = document.getElementById('title').value.trim();
-        const description = document.getElementById('description').value.trim();
-        const select = document.getElementById('technologies');
-        const technologies = Array.from(select.selectedOptions).map(opt => opt.value);
-        const imageUrl = document.getElementById('badgePreview').src;
-
-        const badge = {
-            title,
-            description,
-            technologies,
-            imageUrl
-        };
-
-        const url = editingId ? `/api/v1/badges/update/${editingId}` : '/api/v1/badges/create';
-        const method = editingId ? 'PUT' : 'POST';
-
-        fetch(url, {
-            method: method,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(badge)
-        })
-        .then(res => {
-            if (res.ok) {
-                swal("Sucesso!", `Badge ${editingId ? 'atualizada' : 'criada'} com sucesso!`, "success").then(() => {
-                    editingId = null;
-                    clearForm();
-                    loadBadges();
-                });
-            } else {
-                swal("Erro!", "Não foi possível salvar a badge. Tente novamente.", "error");
-            }
-        });
-    }
-
-
-    function editBadge(id) {
-        const badge = badges.find(b => b.id === id);
-        if (!badge) return;
-
-        editingId = id;
-
-        document.getElementById('title').value = badge.title;
-        document.getElementById('description').value = badge.description;
-
-        const select = document.getElementById('technologies');
-        Array.from(select.options).forEach(option => {
-            option.selected = badge.technologies.includes(option.value);
-        });
-
-        document.getElementById('badgePreview').src = badge.imageUrl;
-    }
-
-    function deleteBadge(id) {
-        swal({
-            title: "Tem certeza?",
-            text: "Essa ação não poderá ser desfeita!",
-            icon: "warning",
-            buttons: ["Cancelar", "Sim, excluir!"],
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
-                fetch(`/api/v1/badges/${id}/delete`, { method: 'DELETE' })
-                    .then(res => {
-                        if (res.ok) {
-                            swal("Excluído!", "Badge excluída com sucesso.", "success").then(() => {
-                                loadBadges();
-                            });
-                        } else {
-                            swal("Erro!", "Não foi possível excluir a badge.", "error");
-                        }
-                    });
-            }
-        });
-    }
-
-    function resetForm() {
-        editingBadgeId = null;
-        document.querySelector('input[placeholder="Ex.: Explorador de Desafios"]').value = '';
-        document.querySelector('textarea').value = '';
-        const select = document.querySelector('select');
-        Array.from(select.options).forEach(option => option.selected = false);
-        document.getElementById('badgePreview').src = "https://api.dicebear.com/8.x/bottts/svg?seed=placeholder";
-    }
-
-    function loadBadges() {
-        fetch('/api/v1/badges/all')
-        .then(response => response.json())
-        .then(data => {
-            badges = data; // 👉 Armazena localmente
-            const tbody = document.getElementById('badgesTableBody');
-            tbody.innerHTML = '';
-
-            badges.forEach(badge => {
-                const row = document.createElement('tr');
-
-                row.innerHTML = `
-                    <td class="px-4 py-2 flex items-center gap-2">
-                        <img src="${badge.imageUrl}" alt="Badge" class="w-8 h-8 rounded-full border border-gray-300"/>
-                        <span>${badge.title}</span>
-                    </td>
-                    <td class="px-4 py-2">${badge.description}</td>
-                    <td class="px-4 py-2">${badge.technologies.join(', ')}</td>
-                    <td class="px-4 py-2 space-x-2">
-                        <button class="text-blue-600 hover:underline text-sm" onclick="editBadge(${badge.id})">Editar</button>
-                        <button class="text-red-600 hover:underline text-sm" onclick="deleteBadge(${badge.id})">Excluir</button>
-                    </td>
-                `;
-
-                tbody.appendChild(row);
-            });
-        })
-        .catch(err => console.error('Erro ao carregar badges:', err));
-    }
-
-    function clearForm() {
-        document.getElementById('title').value = '';
-        document.getElementById('description').value = '';
-        const select = document.getElementById('technologies');
-        Array.from(select.options).forEach(opt => opt.selected = false);
-        document.getElementById('badgePreview').src = 'https://api.dicebear.com/8.x/bottts/svg?seed=placeholder';
-        editingId = null;
-    }
-
-    function deleteBadge(id) {
-        swal({
-            title: "Tem certeza?",
-            text: "Essa ação não pode ser desfeita!",
-            icon: "warning",
-            buttons: ["Cancelar", "Excluir"],
-            dangerMode: true,
-        }).then((willDelete) => {
-            if (willDelete) {
-                fetch(`/api/v1/badges/delete/${id}`, {
-                    method: 'DELETE'
-                })
-                .then(res => {
-                    if (res.ok) {
-                        swal("Badge excluída com sucesso!", { icon: "success" })
-                        .then(() => loadBadges());
-                    } else {
-                        swal("Erro ao excluir a badge.", { icon: "error" });
-                    }
-                });
-            }
-        });
-    }
-
-    function logout() {
-        window.location.href = "/logout";
-    }
-
-    window.onload = loadBadges;
-    lucide.createIcons();
-</script>
+<script>lucide.createIcons();</script>
 </body>
 </html>
