@@ -20,7 +20,7 @@ public class UserModel {
     @Column(nullable = false, length = 60)
     private String password;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @Enumerated(EnumType.STRING)

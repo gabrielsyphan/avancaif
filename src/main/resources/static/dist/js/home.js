@@ -31,5 +31,9 @@ if (token) {
 function logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    window.location.href = '/';
+
+    fetch('/logout', { method: 'POST' })
+        .finally(() => {
+            window.location.href = '/';
+        });
 }

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | AvancaIF Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-sm py-4">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+        <a href="/dash" class="text-2xl font-semibold text-gray-800">Avanca<span class="text-blue-600">IF</span> Admin</a>
+        <div class="space-x-4">
+            <a href="/dash" class="text-gray-700 font-medium hover:text-blue-600 transition">Dashboard</a>
+            <a href="/logout" class="text-gray-700 font-medium hover:text-blue-600 transition">Sair</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Conteúdo -->
+<main class="flex-grow px-6 py-10 max-w-7xl mx-auto">
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Gerenciar Cursos -->
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <i data-lucide="book-open" class="w-8 h-8 text-blue-600 mb-4"></i>
+            <h2 class="text-lg font-semibold mb-2 text-gray-800">Gerenciar Cursos</h2>
+            <p class="text-sm text-gray-600 mb-4">Crie, edite e visualize os cursos disponíveis, além de inserir professores e alunos.</p>
+            <a href="/admin/cursos" class="text-blue-600 font-medium hover:underline">Acessar</a>
+        </div>
+
+        <!-- Gerenciar Projetos -->
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <i data-lucide="code" class="w-8 h-8 text-blue-600 mb-4"></i>
+            <h2 class="text-lg font-semibold mb-2 text-gray-800">Gerenciar Projetos</h2>
+            <p class="text-sm text-gray-600 mb-4">Gerencie categorias de projetos, visualize os projetos submetidos e associe badges.</p>
+            <a href="/admin/projetos" class="text-blue-600 font-medium hover:underline">Acessar</a>
+        </div>
+
+        <!-- Gerenciar Badges -->
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <i data-lucide="award" class="w-8 h-8 text-blue-600 mb-4"></i>
+            <h2 class="text-lg font-semibold mb-2 text-gray-800">Gerenciar Badges</h2>
+            <p class="text-sm text-gray-600 mb-4">Visualize, cadastre e associe badges aos projetos ou usuários conforme critérios avaliativos.</p>
+            <a href="/admin/badges" class="text-blue-600 font-medium hover:underline">Acessar</a>
+        </div>
+
+        <!-- Gerenciar Categorias -->
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <i data-lucide="layers" class="w-8 h-8 text-blue-600 mb-4"></i>
+            <h2 class="text-lg font-semibold mb-2 text-gray-800">Gerenciar Categorias</h2>
+            <p class="text-sm text-gray-600 mb-4">Adicione e organize categorias para os projetos submetidos na plataforma.</p>
+            <a href="/admin/categorias" class="text-blue-600 font-medium hover:underline">Acessar</a>
+        </div>
+
+        <!-- Gerenciar Avaliadores -->
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <i data-lucide="users" class="w-8 h-8 text-blue-600 mb-4"></i>
+            <h2 class="text-lg font-semibold mb-2 text-gray-800">Gerenciar Avaliadores</h2>
+            <p class="text-sm text-gray-600 mb-4">Associe professores como avaliadores nas bancas dos projetos dos alunos.</p>
+            <a href="/admin/avaliadores" class="text-blue-600 font-medium hover:underline">Acessar</a>
+        </div>
+
+        <!-- Relatórios ou Dashboard -->
+        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition">
+            <i data-lucide="bar-chart-2" class="w-8 h-8 text-blue-600 mb-4"></i>
+            <h2 class="text-lg font-semibold mb-2 text-gray-800">Relatórios e Estatísticas</h2>
+            <p class="text-sm text-gray-600 mb-4">Acompanhe métricas de uso, participação dos alunos e progresso dos cursos e projetos.</p>
+            <a href="/admin/relatorios" class="text-blue-600 font-medium hover:underline">Acessar</a>
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="py-6 text-center text-sm text-gray-500">
+    <p>&copy; 2025 AvancaIF. Todos os direitos reservados.</p>
+</footer>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

@@ -54,6 +54,15 @@ public class SecurityConfig {
 
         http.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
 
+        http.logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies()
+                .deleteCookies("JSESSIONID", "JWT")
+        );
+
         return http.build();
     }
 

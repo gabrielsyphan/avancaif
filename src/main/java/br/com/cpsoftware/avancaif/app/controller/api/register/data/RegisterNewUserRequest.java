@@ -2,6 +2,7 @@ package br.com.cpsoftware.avancaif.app.controller.api.register.data;
 
 import br.com.cpsoftware.avancaif.domain.entity.user.UserEntity;
 import br.com.cpsoftware.avancaif.domain.enums.Enabled;
+import br.com.cpsoftware.avancaif.domain.enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -16,11 +17,10 @@ public record RegisterNewUserRequest(
         @NotBlank(message = "Password is required")
         String password,
 
-        @NotBlank(message = "Role is required")
-        String role
+        Role role
 ) {
 
     public UserEntity toUserEntity() {
-        return new UserEntity(name, email, password, Enabled.Y, role);
+        return new UserEntity(name, email, password, Enabled.Y, role.name());
     }
 }

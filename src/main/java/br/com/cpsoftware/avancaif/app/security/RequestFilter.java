@@ -31,7 +31,8 @@ public class RequestFilter extends OncePerRequestFilter {
 
 
     @Override
-    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+    protected void doFilterInternal(@NonNull HttpServletRequest request,
+                                    @NonNull HttpServletResponse response,
                                     @NonNull FilterChain chain)
             throws ServletException, IOException {
 
@@ -39,12 +40,12 @@ public class RequestFilter extends OncePerRequestFilter {
         String jwtToken = null;
         String email = null;
 
-        // 🔥 Tenta pegar do header Authorization
+        // Tenta pegar do header
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
             jwtToken = requestTokenHeader.substring(7);
         }
 
-        // 🔥 Se não veio no header, tenta pegar de um cookie chamado "JWT"
+        // Se não veio no header, tenta pegar do cookie
         if (jwtToken == null && request.getCookies() != null) {
             for (var cookie : request.getCookies()) {
                 if (cookie.getName().equals("JWT")) {
@@ -54,30 +55,33 @@ public class RequestFilter extends OncePerRequestFilter {
             }
         }
 
-        // 🔥 Valida o token
-        if (jwtToken != null) {
-            try {
-                email = jwtUtil.getUserEmailFromToken(jwtToken);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
-            } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
-            }
+        // 🔥 Se não tem token, ignora. Deixa o Spring cuidar (via sessão).
+        if (jwtToken == null) {
+            chain.doFilter(request, response);
+            return;
         }
 
-        // 🔥 Se tem email e ainda não está autenticado
+        try {
+            email = jwtUtil.getUserEmailFromToken(jwtToken);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Unable to get JWT Token");
+        } catch (ExpiredJwtException e) {
+            System.out.println("JWT Token has expired");
+        }
+
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             var userDetails = this.userDetailsService.loadUserByUsername(email);
 
             if (jwtUtil.validateToken(jwtToken, userDetails)) {
-                var usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities());
-                usernamePasswordAuthenticationToken
-                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                var authentication = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities()
+                );
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
 
         chain.doFilter(request, response);
     }
+
 }

@@ -21,13 +21,11 @@ form.addEventListener('submit', async function (e) {
     loader.style.display = 'none';
 
     if (response.ok) {
-      swal("Sucesso!", "Login realizado com sucesso!", "success").then(() => {
         response.json().then(data => {
           localStorage.setItem('token', data.token);
           localStorage.setItem('email', data.email);
-          window.location.href = "/";
+          window.location.href = "/dash";
         });
-      });
     } else {
       const err = await response.json();
       swal("Erro!", err.message || "Não foi possível fazer login.", "error");
